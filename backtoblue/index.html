@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Back to Blue: Gediz Deltası ve İzmir Körfezi için endüstriyel atık kirliliği ve koku algısına karşı bilimsel veri temelli dijital savunuculuk kampanyası.">
+  <meta name="theme-color" content="#030b17">
+  <title>Back to Blue — Gediz Deltası &amp; İzmir Körfezi</title>
+
+  <!-- Ayrı CSS ve JS bağlantıları (GitHub Pages uyumlu) -->
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">İçeriğe geç</a>
+
+  <!-- Üst Kaydırma Su Seviyesi Çubuğu -->
+  <div class="scroll-water-bar" id="scrollWaterBar" aria-hidden="true"></div>
+
+  <!-- Yüzen Cam Gezinme Çubuğu -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Back to Blue Ana Sayfa">
+        <span class="brand-drop" aria-hidden="true"></span>
+        <span class="brand-text">Back to <strong>Blue</strong></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Ana menü">
+        <a href="#vizyon">Maviye Dönüş</a>
+        <a href="#harita">Odak Bölgeler</a>
+        <a href="#strateji">Kampanya</a>
+        <a href="#paydaslar">Paydaşlar</a>
+        <a href="#anket">Anket</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#anket" class="btn btn-glow btn-sm desktop-only">Ankete Katıl</a>
+        <button
+          type="button"
+          class="menu-btn"
+          id="menuToggle"
+          aria-label="Menüyü aç veya kapat"
+          aria-expanded="false"
+          aria-controls="mobileNav"
+        >
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobil menü" hidden>
+      <a href="#vizyon">Maviye Dönüş</a>
+      <a href="#harita">Odak Bölgeler</a>
+      <a href="#strateji">Kampanya</a>
+      <a href="#paydaslar">Paydaşlar</a>
+      <a href="#anket" class="btn btn-glow">Ankete Katıl</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- Etkileşimli Su & Dalga Hero Bölümü -->
+    <section class="hero" id="top">
+      <!-- Canlı Fizik Tabanlı Dalga ve Su Halkası Canvas'ı -->
+      <canvas id="oceanCanvas" class="ocean-canvas" aria-hidden="true"></canvas>
+      <div class="hero-caustics" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <div class="hero-pill reveal">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>İzmir Kent Konseyi İş Birliğiyle · Gediz Deltası</span>
+        </div>
+
+        <h1 class="hero-title reveal">
+          İzmir Körfezi için<br>
+          <span class="liquid-text">maviye dönüş.</span>
+        </h1>
+
+        <p class="hero-lead reveal">
+          Gediz Deltası ve İzmir Körfezi’ndeki endüstriyel atık kirliliği ile koku algısına karşı bilimsel veri şeffaflığı, yapıcı savunuculuk ve çok paydaşlı diyalogla hareket ediyoruz.
+        </p>
+
+        <div class="hero-cta reveal">
+          <a href="#anket" class="btn btn-glow">
+            <span>350 Katılımcılı Ankete Katıl</span>
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 10h10M11 6l4 4-4 4"></path>
+            </svg>
+          </a>
+          <a href="#harita" class="btn btn-glass">4 Odak İlçeyi Keşfet</a>
+        </div>
+
+        <p class="interaction-hint reveal" aria-hidden="true">
+          Suyu dalgalandırmak için ekranda imlecinizi gezdirin veya tıklayın
+        </p>
+      </div>
+
+      <!-- Aşağı Akan Organik Dalga Geçişi -->
+      <div class="wave-divider" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path class="wave-back" d="M0,48 C280,110 560,0 880,62 C1140,112 1320,38 1440,56 L1440,120 L0,120 Z"></path>
+          <path class="wave-front" d="M0,74 C340,16 680,118 1060,54 C1240,24 1360,64 1440,78 L1440,120 L0,120 Z"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Etkileşimli "Maviye Dönüş" Su Berraklığı Deneyimi -->
+    <section class="section" id="vizyon">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">İnteraktif Deneyim</span>
+          <h2 class="section-title">Kirlilikten maviye: Değişimi kendin gör.</h2>
+          <p class="section-desc">
+            Aşağıdaki sürgüyü kaydırarak endüstriyel atık baskısı altındaki kıyı ekosisteminin veri temelli ve şeffaf yönetimle nasıl dönüşebileceğini inceleyin.
+          </p>
+        </div>
+
+        <div class="clarity-stage glass-card reveal" id="clarityStage">
+          <!-- Su Görsel Alanı -->
+          <div class="clarity-viewport" id="clarityViewport">
+            <div class="water-layer water-turbid" aria-hidden="true"></div>
+            <div class="water-layer water-clear" id="waterClearLayer" aria-hidden="true"></div>
+            <div class="water-shimmer" aria-hidden="true"></div>
+            <div class="water-particles" id="waterParticles" aria-hidden="true"></div>
+
+            <div class="clarity-overlay">
+              <div class="clarity-status">
+                <span class="status-chip" id="clarityBadge">Mevcut Baskı</span>
+                <h3 class="clarity-headline" id="clarityHeadline">Endüstriyel Yük ve Koku Algısı</h3>
+                <p class="clarity-copy" id="clarityCopy">
+                  Gediz Havzası’ndan taşınan sanayi atıkları ve arıtma eksiklikleri su berraklığını düşürürken kıyı hattında koku algısını artırıyor.
+                </p>
+              </div>
+
+              <div class="clarity-metrics">
+                <div class="mini-metric">
+                  <span class="mini-metric__label">Su Berraklığı</span>
+                  <strong class="mini-metric__val" id="metricClarity">%28</strong>
+                </div>
+                <div class="mini-metric">
+                  <span class="mini-metric__label">Koku Baskısı</span>
+                  <strong class="mini-metric__val" id="metricOdor">Yüksek</strong>
+                </div>
+                <div class="mini-metric">
+                  <span class="mini-metric__label">Delta Dengesi</span>
+                  <strong class="mini-metric__val" id="metricEco">Risk Altında</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Etkileşimli Kaydırıcı Kontrolü -->
+          <div class="clarity-controls">
+            <span class="slider-end">Endüstriyel Baskı</span>
+            <label class="sr-only" for="claritySlider">Su berraklığı dönüşüm seviyesi</label>
+            <input
+              type="range"
+              id="claritySlider"
+              class="water-slider"
+              min="0"
+              max="100"
+              value="24"
+            >
+            <span class="slider-end slider-end--blue">Back to Blue</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Etkileşimli İzmir Körfezi & 4 Odak İlçe Haritası -->
+    <section class="section section-deep" id="harita">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Saha Odağı · 4 İlçe</span>
+          <h2 class="section-title">Gediz Deltası’ndan Körfez’e tek ekosistem.</h2>
+          <p class="section-desc">
+            Harita üzerindeki parlayan noktalara veya ilçe sekmelerine tıklayarak Çiğli, Karşıyaka, Menemen ve Foça’daki çevresel dinamikleri inceleyin.
+          </p>
+        </div>
+
+        <div class="map-layout reveal">
+          <!-- Stilize Etkileşimli İzmir Körfezi SVG Haritası -->
+          <div class="map-canvas-card glass-card">
+            <div class="map-header-bar">
+              <span class="map-coords" id="mapCoords">38.49° K · 26.95° D</span>
+              <span class="map-legend">Etkileşimli Körfez Haritası</span>
+            </div>
+
+            <svg class="gulf-svg" viewBox="0 0 600 420" role="img" aria-label="Çiğli, Karşıyaka, Menemen ve Foça odak noktalarını gösteren İzmir Körfezi haritası">
+              <defs>
+                <radialGradient id="gulfGlow" cx="45%" cy="55%" r="60%">
+                  <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.28"></stop>
+                  <stop offset="100%" stop-color="#031326" stop-opacity="0"></stop>
+                </radialGradient>
+                <linearGradient id="riverLine" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#38ef7d" stop-opacity="0.2"></stop>
+                  <stop offset="50%" stop-color="#00d4ff" stop-opacity="0.9"></stop>
+                  <stop offset="100%" stop-color="#0077ff" stop-opacity="0.3"></stop>
+                </linearGradient>
+              </defs>
+
+              <!-- Deniz Parıltısı ve Izgara -->
+              <rect width="600" height="420" fill="url(#gulfGlow)"></rect>
+              <g class="map-grid" opacity="0.16">
+                <line x1="0" y1="105" x2="600" y2="105"></line>
+                <line x1="0" y1="210" x2="600" y2="210"></line>
+                <line x1="0" y1="315" x2="600" y2="315"></line>
+                <line x1="150" y1="0" x2="150" y2="420"></line>
+                <line x1="300" y1="0" x2="300" y2="420"></line>
+                <line x1="450" y1="0" x2="450" y2="420"></line>
+              </g>
+
+              <!-- Stilize Kuzey İzmir Körfezi & Gediz Deltası Kıyı Şekli -->
+              <path
+                class="coastline-fill"
+                d="M120,0 L600,0 L600,320 C535,305 495,295 450,278 C425,268 415,250 382,248 C345,246 312,254 275,236 C248,223 238,195 215,176 C190,155 152,148 138,116 C126,88 140,42 120,0 Z"
+              ></path>
+
+              <!-- Gediz Nehri Akış Yolu -->
+              <path
+                class="river-path"
+                d="M575,86 C505,104 452,126 392,145 C340,162 308,186 276,204"
+                stroke="url(#riverLine)"
+              ></path>
+
+              <!-- Körfez Su Etiketi -->
+              <text x="158" y="330" class="map-water-label">İZMİR KÖRFEZİ</text>
+              <text x="448" y="102" class="map-river-label">Gediz Havzası →</text>
+
+              <!-- 4 Etkileşimli İlçe Noktası -->
+              <g class="map-node" data-district="foca" tabindex="0" role="button" aria-label="Foça detaylarını göster">
+                <circle class="node-pulse" cx="164" cy="112" r="22"></circle>
+                <circle class="node-core" cx="164" cy="112" r="7"></circle>
+                <text x="182" y="108" class="node-label">Foça</text>
+              </g>
+
+              <g class="map-node" data-district="menemen" tabindex="0" role="button" aria-label="Menemen detaylarını göster">
+                <circle class="node-pulse" cx="406" cy="142" r="22"></circle>
+                <circle class="node-core" cx="406" cy="142" r="7"></circle>
+                <text x="424" y="138" class="node-label">Menemen</text>
+              </g>
+
+              <g class="map-node is-active" data-district="cigli" tabindex="0" role="button" aria-label="Çiğli detaylarını göster">
+                <circle class="node-pulse" cx="304" cy="214" r="24"></circle>
+                <circle class="node-core" cx="304" cy="214" r="8"></circle>
+                <text x="322" y="210" class="node-label">Çiğli</text>
+              </g>
+
+              <g class="map-node" data-district="karsiyaka" tabindex="0" role="button" aria-label="Karşıyaka detaylarını göster">
+                <circle class="node-pulse" cx="426" cy="264" r="22"></circle>
+                <circle class="node-core" cx="426" cy="264" r="7"></circle>
+                <text x="444" y="260" class="node-label">Karşıyaka</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Seçili İlçe Detay Kartı -->
+          <div class="district-panel glass-card">
+            <div class="district-tabs" role="tablist" aria-label="Odak ilçeler">
+              <button type="button" class="district-tab is-active" role="tab" aria-selected="true" data-district="cigli">Çiğli</button>
+              <button type="button" class="district-tab" role="tab" aria-selected="false" data-district="karsiyaka">Karşıyaka</button>
+              <button type="button" class="district-tab" role="tab" aria-selected="false" data-district="menemen">Menemen</button>
+              <button type="button" class="district-tab" role="tab" aria-selected="false" data-district="foca">Foça</button>
+            </div>
+
+            <div class="district-content" id="districtContent" aria-live="polite">
+              <span class="district-tag" id="districtTag"></span>
+              <h3 class="district-title" id="districtTitle"></h3>
+              <p class="district-summary" id="districtSummary"></p>
+
+              <div class="district-box">
+                <h4>Öne Çıkan Çevresel Dinamik</h4>
+                <p id="districtPressure"></p>
+              </div>
+
+              <div class="district-box">
+                <h4>Kampanya Yaklaşımımız</h4>
+                <p id="districtApproach"></p>
+              </div>
+
+              <div class="district-tags" id="districtPills"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kampanya Bileşenleri (Projede Gerçekten Yer Alan 4 Çıktı) -->
+    <section class="section" id="strateji">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Proje Mimarisi</span>
+          <h2 class="section-title">Yapıcı, veri temelli ve şeffaf savunuculuk.</h2>
+          <p class="section-desc">
+            Agresif bir dil yerine bilimsel verilere, uzman görüşlerine ve yerel katılım gücüne dayanan dört ana çalışma kolu yürütüyoruz.
+          </p>
+        </div>
+
+        <div class="bento-pillars" id="pillarsGrid"></div>
+      </div>
+    </section>
+
+    <!-- Paydaş Ağı -->
+    <section class="section section-deep" id="paydaslar">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Ortaklık &amp; Diyalog</span>
+          <h2 class="section-title">Çözüm için kurumsal iş birliği.</h2>
+          <p class="section-desc">
+            İzmir Kent Konseyi ortaklığıyla başlayan kampanyamız, sanayi odaları ve yerel yönetimler arasında ortak akıl üretmeyi hedefliyor.
+          </p>
+        </div>
+
+        <div class="stakeholder-grid" id="stakeholderGrid"></div>
+      </div>
+    </section>
+
+    <!-- 350 Katılımcılı Google Forms Anketi -->
+    <section class="section" id="anket">
+      <div class="container">
+        <div class="survey-spotlight glass-card reveal">
+          <div class="survey-copy">
+            <span class="eyebrow">Araştırmaya Katıl</span>
+            <h2 class="section-title">Sesin, Körfez raporuna dönüşsün.</h2>
+            <p class="section-desc">
+              İzmir Körfezi ve Gediz Deltası’ndaki endüstriyel kirlilik ile koku algısını ölçtüğümüz <strong>350 katılımcılı</strong> çevrimiçi anketimize yalnızca birkaç dakikanızı ayırarak katkı sunabilirsiniz.
+            </p>
+
+            <div class="survey-actions">
+              <a href="#" class="btn btn-glow" id="surveyCtaLink" target="_blank" rel="noopener noreferrer">
+                <span>Google Forms Anketini Doldur</span>
+                <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M7 13L13 7M8 7h5v5"></path>
+                </svg>
+              </a>
+              <button type="button" class="btn btn-glass" id="shareLinkBtn">Kampanya Linkini Kopyala</button>
+            </div>
+          </div>
+
+          <!-- Dairesel Su Dolum Göstergesi (SVG Ring) -->
+          <div class="survey-ring-card">
+            <div class="ring-wrap" aria-label="Anket katılım hedefi göstergesi">
+              <svg class="progress-ring" viewBox="0 0 160 160">
+                <defs>
+                  <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00d4ff"></stop>
+                    <stop offset="100%" stop-color="#38ef7d"></stop>
+                  </linearGradient>
+                </defs>
+                <circle class="ring-track" cx="80" cy="80" r="66"></circle>
+                <circle class="ring-fill" id="surveyRingFill" cx="80" cy="80" r="66"></circle>
+              </svg>
+              <div class="ring-center">
+                <strong id="surveyRingPercent">%0</strong>
+                <span id="surveyRingNumbers">0 / 350</span>
+              </div>
+            </div>
+            <p class="ring-caption">Hedeflenen katılımcı sayısına doğru güncel ilerleme</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="brand-text">Back to <strong>Blue</strong></span>
+        <p class="footer-note">
+          Yaşar Üniversitesi Yeni Medya ve İletişim Bölümü Bitirme Projesi · İzmir Kent Konseyi İş Birliğiyle
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#" id="footerInstagram" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="#" id="footerLinkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <button type="button" class="footer-email-btn" id="footerEmailBtn">E-posta Kopyala</button>
+        <a href="#top" class="back-top">Yukarı ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bildirim Hapı -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

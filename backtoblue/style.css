@@ -1,0 +1,1196 @@
+/* ==========================================================================
+   Back to Blue — Modern Fluid & Bioluminescent Aegean Aesthetic
+   ========================================================================== */
+:root {
+  --bg-abyss: #030b17;
+  --bg-deep: #061529;
+  --bg-card: rgba(10, 29, 52, 0.56);
+  --bg-card-hover: rgba(14, 39, 68, 0.72);
+  --border-glass: rgba(125, 211, 252, 0.16);
+  --border-glass-strong: rgba(56, 224, 255, 0.42);
+
+  --text-main: #f0f9ff;
+  --text-muted: #9cc0db;
+  --text-dim: #6e94b2;
+
+  --cyan: #00d4ff;
+  --blue: #0077ff;
+  --aqua: #38ef7d;
+  --amber-turbid: #6b5d3b;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter",
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 9999px;
+  --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+  --header-h: 72px;
+}
+
+/* ==========================================================================
+   Temel Kurallar & Erişilebilirlik
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 20px);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-main);
+  background-color: var(--bg-abyss);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 300;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--cyan);
+  color: #031326;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 14px;
+}
+
+.container {
+  width: min(1140px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* Kaydırma Su Çizgisi */
+.scroll-water-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--aqua));
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.75);
+}
+
+/* ==========================================================================
+   Yüzen Cam Gezinme Çubuğu
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  transition: background-color 0.35s var(--ease-fluid), border-color 0.35s var(--ease-fluid);
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.is-scrolled {
+  background: rgba(3, 11, 23, 0.74);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom-color: var(--border-glass);
+}
+
+.header-inner {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+.brand-drop {
+  width: 14px;
+  height: 14px;
+  border-radius: 50% 50% 50% 4px;
+  transform: rotate(-45deg);
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.7);
+}
+
+.brand-text strong {
+  color: var(--cyan);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text-main);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.04);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.menu-btn span {
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-main);
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px 24px;
+  background: rgba(3, 11, 23, 0.94);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-glass);
+}
+
+.mobile-nav[hidden] {
+  display: none;
+}
+
+.mobile-nav a:not(.btn) {
+  padding: 10px 4px;
+  font-size: 16px;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ==========================================================================
+   Modern Düğmeler
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: 1px solid transparent;
+  transition: transform 0.25s var(--ease-fluid), box-shadow 0.25s var(--ease-fluid),
+    background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-sm {
+  padding: 9px 18px;
+  font-size: 13.5px;
+}
+
+.btn-glow {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--blue) 100%);
+  color: #021121;
+  box-shadow: 0 8px 28px rgba(0, 180, 255, 0.35);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 12px 36px rgba(0, 212, 255, 0.55);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-glass);
+  color: var(--text-main);
+  backdrop-filter: blur(12px);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--border-glass-strong);
+}
+
+/* ==========================================================================
+   Hero & Etkileşimli Su Canvas'ı
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: calc(var(--header-h) + 64px) 0 150px;
+  display: flex;
+  align-items: center;
+  background: radial-gradient(circle at 75% 15%, rgba(0, 119, 255, 0.24), transparent 52%),
+    radial-gradient(circle at 20% 25%, rgba(0, 212, 255, 0.16), transparent 48%),
+    linear-gradient(180deg, #020812 0%, #05162c 62%, #072242 100%);
+  overflow: hidden;
+}
+
+.ocean-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Su Altı Işık Kırılması (Caustics) */
+.hero-caustics {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  background: radial-gradient(ellipse at 30% 40%, rgba(0, 212, 255, 0.14), transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(56, 239, 125, 0.08), transparent 48%);
+  filter: blur(40px);
+  animation: causticDrift 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes causticDrift {
+  0% { transform: translate(-2%, -2%) scale(1); }
+  100% { transform: translate(3%, 3%) scale(1.08); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  margin-bottom: 24px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 212, 255, 0.09);
+  border: 1px solid rgba(0, 212, 255, 0.26);
+  font-size: 13px;
+  font-weight: 500;
+  color: #bceeff;
+  backdrop-filter: blur(10px);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--aqua);
+  box-shadow: 0 0 0 0 rgba(56, 239, 125, 0.7);
+  animation: pulseRing 2.2s infinite;
+}
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(56, 239, 125, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(56, 239, 125, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(56, 239, 125, 0); }
+}
+
+.hero-title {
+  margin: 0 0 22px;
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  font-weight: 750;
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+}
+
+.liquid-text {
+  background: linear-gradient(110deg, #ffffff 0%, #67e8f9 35%, #00d4ff 65%, #38ef7d 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmerFlow 6s linear infinite;
+}
+
+@keyframes shimmerFlow {
+  to { background-position: 200% center; }
+}
+
+.hero-lead {
+  margin: 0 0 36px;
+  max-width: 600px;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.58;
+  color: var(--text-muted);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.interaction-hint {
+  margin: 28px 0 0;
+  font-size: 12.5px;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
+/* Dalga Bölüm Ayırıcı */
+.wave-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 3;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.wave-divider svg {
+  width: 100%;
+  height: clamp(56px, 8vw, 110px);
+  display: block;
+}
+
+.wave-back {
+  fill: rgba(3, 11, 23, 0.45);
+}
+
+.wave-front {
+  fill: var(--bg-abyss);
+}
+
+/* ==========================================================================
+   Bölüm Başlıkları & Cam Kartlar (Cursor Spotlight Glow)
+   ========================================================================== */
+.section {
+  padding: clamp(72px, 10vw, 124px) 0;
+  position: relative;
+}
+
+.section-deep {
+  background: linear-gradient(180deg, var(--bg-abyss) 0%, var(--bg-deep) 50%, var(--bg-abyss) 100%);
+}
+
+.section-head {
+  max-width: 680px;
+  margin-bottom: 44px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.section-title {
+  margin: 0 0 14px;
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.section-desc {
+  margin: 0;
+  font-size: 16.5px;
+  color: var(--text-muted);
+}
+
+.glass-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.35s var(--ease-fluid);
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0, 212, 255, 0.12),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+.glass-card:hover {
+  border-color: var(--border-glass-strong);
+}
+
+/* ==========================================================================
+   Etkileşimli "Maviye Dönüş" Su Berraklığı Modülü
+   ========================================================================== */
+.clarity-stage {
+  padding: 20px;
+}
+
+.clarity-viewport {
+  position: relative;
+  min-height: 360px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.water-layer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.25s linear;
+}
+
+.water-turbid {
+  background: radial-gradient(circle at 25% 20%, rgba(154, 134, 78, 0.45), transparent 55%),
+    linear-gradient(155deg, #2b2920 0%, #263834 55%, #162426 100%);
+}
+
+.water-clear {
+  opacity: 0.24;
+  background: radial-gradient(circle at 25% 15%, rgba(56, 239, 125, 0.26), transparent 50%),
+    radial-gradient(circle at 80% 30%, rgba(0, 212, 255, 0.48), transparent 55%),
+    linear-gradient(155deg, #004e92 0%, #0077b6 48%, #023e8a 100%);
+}
+
+.water-shimmer {
+  position: absolute;
+  inset: -40%;
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.05) 0px,
+    transparent 24px,
+    rgba(0, 212, 255, 0.04) 48px
+  );
+  animation: shimmerSpin 26s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmerSpin {
+  to { transform: rotate(360deg); }
+}
+
+.water-particles {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(186, 174, 125, 0.5) 2px, transparent 2px),
+    radial-gradient(rgba(130, 140, 100, 0.35) 1.5px, transparent 1.5px);
+  background-size: 38px 38px, 26px 26px;
+  background-position: 0 0, 14px 18px;
+  opacity: 0.76;
+  pointer-events: none;
+  transition: opacity 0.25s linear;
+}
+
+.clarity-overlay {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.clarity-status {
+  max-width: 520px;
+}
+
+.status-chip {
+  display: inline-block;
+  padding: 5px 12px;
+  margin-bottom: 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(3, 11, 23, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.clarity-headline {
+  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.clarity-copy {
+  margin: 0;
+  font-size: 15px;
+  color: rgba(240, 249, 255, 0.88);
+}
+
+.clarity-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(105px, 1fr));
+  gap: 10px;
+}
+
+.mini-metric {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(3, 11, 23, 0.56);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mini-metric__label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.mini-metric__val {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.clarity-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 10px 6px;
+}
+
+.slider-end {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.slider-end--blue {
+  color: var(--cyan);
+}
+
+.water-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #5d553a 0%, #0077ff 55%, #00d4ff 100%);
+  outline: none;
+  cursor: pointer;
+}
+
+.water-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--cyan);
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.85);
+  transition: transform 0.2s ease;
+}
+
+.water-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.water-slider::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--cyan);
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.85);
+}
+
+/* ==========================================================================
+   Etkileşimli İzmir Körfezi SVG Haritası & İlçe Paneli
+   ========================================================================== */
+.map-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.map-canvas-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.gulf-svg {
+  width: 100%;
+  height: auto;
+  flex: 1;
+  border-radius: 18px;
+  background: radial-gradient(circle at 30% 75%, #082849 0%, #041224 100%);
+  border: 1px solid rgba(125, 211, 252, 0.12);
+}
+
+.map-grid line {
+  stroke: #7dd3fc;
+  stroke-width: 1;
+}
+
+.coastline-fill {
+  fill: rgba(14, 42, 71, 0.85);
+  stroke: rgba(0, 212, 255, 0.45);
+  stroke-width: 2;
+}
+
+.river-path {
+  fill: none;
+  stroke-width: 3;
+  stroke-dasharray: 8 6;
+  animation: riverFlow 18s linear infinite;
+}
+
+@keyframes riverFlow {
+  to { stroke-dashoffset: -140; }
+}
+
+.map-water-label {
+  fill: rgba(125, 211, 252, 0.35);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+}
+
+.map-river-label {
+  fill: rgba(125, 211, 252, 0.72);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.map-node {
+  cursor: pointer;
+}
+
+.map-node .node-pulse {
+  fill: rgba(0, 212, 255, 0.16);
+  stroke: rgba(0, 212, 255, 0.45);
+  stroke-width: 1.5;
+  transition: transform 0.3s ease, fill 0.3s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.map-node .node-core {
+  fill: #7dd3fc;
+  transition: fill 0.25s ease, r 0.25s ease;
+}
+
+.map-node .node-label {
+  fill: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  transition: fill 0.25s ease;
+}
+
+.map-node:hover .node-core,
+.map-node.is-active .node-core {
+  fill: var(--aqua);
+}
+
+.map-node.is-active .node-pulse {
+  fill: rgba(56, 239, 125, 0.24);
+  stroke: var(--aqua);
+  animation: nodeBeacon 2s ease-out infinite;
+}
+
+.map-node.is-active .node-label {
+  fill: #ffffff;
+}
+
+@keyframes nodeBeacon {
+  0% { transform: scale(0.85); opacity: 0.9; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+
+/* İlçe Detay Paneli */
+.district-panel {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.district-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 4px;
+  border-radius: 14px;
+  background: rgba(3, 11, 23, 0.55);
+  border: 1px solid var(--border-glass);
+}
+
+.district-tab {
+  border: 0;
+  padding: 9px 6px;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.district-tab.is-active {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.24), rgba(0, 119, 255, 0.3));
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(0, 212, 255, 0.35);
+}
+
+.district-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+  margin-bottom: 6px;
+}
+
+.district-title {
+  margin: 0 0 10px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.district-summary {
+  margin: 0 0 18px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.district-box {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(3, 11, 23, 0.42);
+  border: 1px solid rgba(125, 211, 252, 0.1);
+  margin-bottom: 12px;
+}
+
+.district-box h4 {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--aqua);
+}
+
+.district-box p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-main);
+}
+
+.district-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.pill-tag {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  font-size: 12px;
+  font-weight: 500;
+  color: #bceeff;
+}
+
+/* ==========================================================================
+   Kampanya Bileşenleri (Bento Grid) & Paydaşlar
+   ========================================================================== */
+.bento-pillars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.pillar-card {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+}
+
+.pillar-num {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--cyan);
+}
+
+.pillar-card h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.pillar-card p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.stakeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.stakeholder-card {
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stakeholder-card--featured {
+  border-color: rgba(0, 212, 255, 0.35);
+  background: linear-gradient(160deg, rgba(0, 119, 255, 0.18), rgba(10, 29, 52, 0.6));
+}
+
+.stakeholder-role {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--aqua);
+}
+
+.stakeholder-card h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.stakeholder-card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Anket Spotlight & Dairesel Su Dolum Halkası
+   ========================================================================== */
+.survey-spotlight {
+  padding: clamp(32px, 5vw, 56px);
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 36px;
+  align-items: center;
+  background: radial-gradient(circle at 85% 20%, rgba(0, 212, 255, 0.18), transparent 52%),
+    var(--bg-card);
+}
+
+.survey-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.survey-ring-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28px;
+  border-radius: 22px;
+  background: rgba(3, 11, 23, 0.48);
+  border: 1px solid var(--border-glass);
+}
+
+.ring-wrap {
+  position: relative;
+  width: 164px;
+  height: 164px;
+  display: grid;
+  place-items: center;
+}
+
+.progress-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: rgba(125, 211, 252, 0.14);
+  stroke-width: 10;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: url(#ringGradient);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 414.69;
+  stroke-dashoffset: 414.69;
+  transition: stroke-dashoffset 1.2s var(--ease-fluid);
+}
+
+.ring-center {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ring-center strong {
+  font-size: 30px;
+  font-weight: 750;
+  line-height: 1.1;
+}
+
+.ring-center span {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.ring-caption {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 220px;
+}
+
+/* ==========================================================================
+   Footer & Toast
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--border-glass);
+  padding: 36px 0 44px;
+  background: #020812;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-note {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.footer-links a:hover,
+.footer-email-btn:hover {
+  color: var(--cyan);
+}
+
+.footer-email-btn {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.toast {
+  position: fixed;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  padding: 11px 20px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 212, 255, 0.94);
+  color: #021121;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 12px 32px rgba(0, 212, 255, 0.4);
+}
+
+.toast[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   Kaydırma Animasyonları
+   ========================================================================== */
+.js-enabled .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s var(--ease-fluid), transform 0.75s var(--ease-fluid);
+}
+
+.js-enabled .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-caustics,
+  .liquid-text,
+  .water-shimmer,
+  .river-path,
+  .pulse-dot,
+  .map-node.is-active .node-pulse {
+    animation: none;
+  }
+  .js-enabled .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Duyarlı Düzen (Responsive)
+   ========================================================================== */
+@media (max-width: 960px) {
+  .map-layout,
+  .survey-spotlight,
+  .stakeholder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stakeholder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-links,
+  .desktop-only {
+    display: none;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+  }
+
+  .bento-pillars,
+  .stakeholder-grid,
+  .clarity-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .clarity-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+}
