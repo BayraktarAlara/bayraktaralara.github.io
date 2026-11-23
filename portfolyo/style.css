@@ -1,0 +1,874 @@
+/* ==========================================================================
+   Apple Human Interface Guidelines (HIG) — Semantic Design Tokens
+   ========================================================================== */
+:root {
+  /* Sistem Renkleri — Açık Tema */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f7;
+  --bg-elevated: #ffffff;
+  --bg-material: rgba(251, 251, 253, 0.78);
+  --bg-segmented: rgba(118, 118, 128, 0.12);
+
+  --label-primary: #1d1d1f;
+  --label-secondary: #6e6e73;
+  --label-tertiary: #86868b;
+
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-focus: rgba(0, 113, 227, 0.35);
+
+  --separator: rgba(0, 0, 0, 0.08);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 14px 36px rgba(0, 0, 0, 0.09);
+  --shadow-sheet: 0 24px 64px rgba(0, 0, 0, 0.22);
+
+  /* Tipografi */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Köşe Yarıçapları ve Hareket */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+  --ease-apple: cubic-bezier(0.28, 0.11, 0.32, 1);
+
+  --nav-height: 52px;
+}
+
+/* Sistem Renkleri — Koyu Tema */
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #111113;
+  --bg-elevated: #1c1c1e;
+  --bg-material: rgba(22, 22, 23, 0.78);
+  --bg-segmented: rgba(118, 118, 128, 0.24);
+
+  --label-primary: #f5f5f7;
+  --label-secondary: #a1a1a6;
+  --label-tertiary: #6e6e73;
+
+  --accent: #2997ff;
+  --accent-hover: #47a6ff;
+  --accent-focus: rgba(41, 151, 255, 0.45);
+
+  --separator: rgba(255, 255, 255, 0.12);
+  --card-border: rgba(255, 255, 255, 0.09);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.55);
+  --shadow-sheet: 0 24px 72px rgba(0, 0, 0, 0.7);
+}
+
+/* ==========================================================================
+   Temel Kurallar & Erişilebilirlik
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 24px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--label-primary);
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s var(--ease-apple), color 0.3s var(--ease-apple);
+}
+
+body.sheet-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--accent-focus);
+  border-radius: 6px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 200;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.container {
+  width: min(1080px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   Üst Gezinme Çubuğu (Vibrancy / Frosted Glass)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-material);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--separator);
+}
+
+.nav-inner {
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  font-size: 14px;
+  color: var(--label-secondary);
+  transition: color 0.2s var(--ease-apple);
+}
+
+.nav-links a:hover {
+  color: var(--label-primary);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--label-primary);
+  transition: background-color 0.2s var(--ease-apple);
+}
+
+.icon-btn:hover {
+  background-color: var(--bg-segmented);
+}
+
+/* Tema İkon Geçişi */
+.icon-sun {
+  display: none;
+}
+
+[data-theme="dark"] .icon-sun {
+  display: block;
+}
+
+[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px 20px;
+  border-top: 1px solid var(--separator);
+  gap: 4px;
+}
+
+.mobile-nav[hidden] {
+  display: none;
+}
+
+.mobile-nav a {
+  padding: 12px 8px;
+  font-size: 17px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--separator);
+}
+
+.mobile-nav a:last-child {
+  border-bottom: 0;
+}
+
+/* ==========================================================================
+   Hero & Tipografi Hiyerarşisi
+   ========================================================================== */
+.hero {
+  padding: clamp(84px, 14vw, 152px) 0 clamp(68px, 10vw, 112px);
+}
+
+.hero-inner {
+  max-width: 780px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hero-title {
+  margin: 0 0 20px;
+  font-size: clamp(2.4rem, 5.8vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.07;
+  letter-spacing: -0.035em;
+}
+
+.hero-subtitle {
+  margin: 0 0 36px;
+  max-width: 580px;
+  font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  color: var(--label-secondary);
+}
+
+.hero-actions,
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   Düğmeler (HIG Pill Buttons)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  border: 1px solid transparent;
+  transition: transform 0.2s var(--ease-apple), background-color 0.2s var(--ease-apple),
+    border-color 0.2s var(--ease-apple);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--separator);
+  color: var(--accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-segmented);
+}
+
+.text-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ==========================================================================
+   Bölümler & Segmented Control
+   ========================================================================== */
+.section {
+  padding: clamp(64px, 9vw, 108px) 0;
+}
+
+.section-tinted {
+  background-color: var(--bg-secondary);
+}
+
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.body-large {
+  margin: 18px 0 0;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--label-secondary);
+}
+
+/* Apple Segmented Control */
+.segmented-control {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-segmented);
+  gap: 2px;
+}
+
+.segment {
+  border: 0;
+  background: transparent;
+  padding: 7px 14px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  transition: background-color 0.25s var(--ease-apple), color 0.25s var(--ease-apple),
+    box-shadow 0.25s var(--ease-apple);
+}
+
+.segment:hover {
+  color: var(--label-primary);
+}
+
+.segment.is-active {
+  background-color: var(--bg-elevated);
+  color: var(--label-primary);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================================================================
+   Bento Proje Izgarası
+   ========================================================================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.35s var(--ease-apple), box-shadow 0.35s var(--ease-apple);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.project-card--featured {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+}
+
+.project-card.is-hidden {
+  display: none;
+}
+
+.project-visual {
+  min-height: 230px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card--featured .project-visual {
+  min-height: 310px;
+}
+
+/* Saf CSS Proje Önizleme Görselleri */
+.visual-ocean {
+  background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 100%);
+}
+
+.visual-indigo {
+  background: linear-gradient(135deg, #1d1d1f 0%, #3a3a3c 100%);
+}
+
+.visual-amber {
+  background: linear-gradient(135deg, #ff9f0a 0%, #ff375f 100%);
+}
+
+.visual-mint {
+  background: linear-gradient(135deg, #30d158 0%, #0a84ff 100%);
+}
+
+.mockup-pill {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.mockup-window {
+  width: min(280px, 90%);
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+}
+
+.mockup-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.mockup-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d2d2d7;
+}
+
+.mockup-dots span:nth-child(1) { background: #ff5f57; }
+.mockup-dots span:nth-child(2) { background: #febc2e; }
+.mockup-dots span:nth-child(3) { background: #28c840; }
+
+.mockup-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mockup-bars span {
+  height: 10px;
+  border-radius: 6px;
+  background: #e5e5ea;
+}
+
+.mockup-stat {
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.mockup-stat span {
+  font-size: 24px;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+.mockup-monogram {
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  font-size: 42px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.mockup-wave {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.project-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.project-meta {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--label-tertiary);
+}
+
+.project-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.project-desc {
+  margin: 0 0 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--label-secondary);
+}
+
+/* ==========================================================================
+   Hakkımda & İletişim
+   ========================================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.info-cards {
+  display: grid;
+  gap: 16px;
+}
+
+.info-card {
+  padding: 24px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--card-border);
+}
+
+.info-card h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--label-secondary);
+}
+
+.contact-inner {
+  text-align: center;
+  max-width: 640px;
+}
+
+.contact-actions {
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 36px 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.social-links a {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  transition: color 0.2s var(--ease-apple);
+}
+
+.social-links a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Alt Bilgi (Footer)
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--separator);
+  padding: 28px 0;
+  font-size: 13px;
+  color: var(--label-tertiary);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+.footer-top:hover {
+  color: var(--label-primary);
+}
+
+/* ==========================================================================
+   Apple HIG Sheet (Modal) & Toast
+   ========================================================================== */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.sheet-backdrop[hidden] {
+  display: none;
+}
+
+.sheet-panel {
+  width: min(560px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-sheet);
+  animation: sheetIn 0.28s var(--ease-apple);
+}
+
+@keyframes sheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.sheet-close {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--bg-segmented);
+  color: var(--label-secondary);
+  display: grid;
+  place-items: center;
+  transition: background-color 0.2s var(--ease-apple), color 0.2s var(--ease-apple);
+}
+
+.sheet-close:hover {
+  color: var(--label-primary);
+}
+
+.sheet-title {
+  margin: 0 0 10px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.sheet-summary {
+  margin: 0;
+  font-size: 16px;
+  color: var(--label-secondary);
+}
+
+.sheet-divider {
+  height: 1px;
+  background-color: var(--separator);
+  margin: 20px 0;
+}
+
+.sheet-details {
+  margin: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--label-primary);
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-list li {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-segmented);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--label-secondary);
+}
+
+.sheet-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background-color: var(--label-primary);
+  color: var(--bg-primary);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.toast[hidden] {
+  display: none;
+}
+
+/* ==========================================================================
+   Kaydırma Animasyonları (Progressive Enhancement)
+   ========================================================================== */
+.js-enabled .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s var(--ease-apple), transform 0.65s var(--ease-apple);
+}
+
+.js-enabled .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js-enabled .reveal,
+  .project-card,
+  .sheet-panel {
+    transition: none;
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Duyarlı Düzen (Responsive)
+   ========================================================================== */
+@media (max-width: 860px) {
+  .project-card--featured {
+    grid-column: span 1;
+    display: flex;
+  }
+
+  .bento-grid,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .segmented-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .segment {
+    flex: 1;
+    padding: 7px 8px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
